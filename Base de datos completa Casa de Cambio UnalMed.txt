@@ -1,0 +1,223 @@
+/*-----------------------------BASE DE DATOS UNAL CAMBIOS----------------------------------------*/ 
+
+CREATE DATABASE casa_de_cambios_unalmed;
+
+USE casa_de_cambios_unalmed;
+
+/*Instrucciones de creación e inserción de la tabla SUCURSAL
+INSERT INTO sucursal VALUES `(`numero de registro`, `nombre`, `ciudad`, `direccion`, `horario`);
+*/
+CREATE TABLE sucursal(
+numeroderegistro INT(10) UNSIGNED PRIMARY KEY,
+nombre VARCHAR(20) UNIQUE NOT NULL, 
+ciudad VARCHAR(20) NOT NULL,
+direccion VARCHAR(20) NOT NULL, 
+horario  VARCHAR(20) NOT NULL
+)ENGINE = InnoDB;
+
+INSERT INTO sucursal VALUES(101,'Tesoro','Medellin','kr 25- 1a sur-45','800:am-8:00pm');
+INSERT INTO sucursal VALUES(203,'Mayorca','Sabaneta','cl 51 sur-40','9:00:am-9:00pm');
+INSERT INTO sucursal VALUES(405,'Puerta del norte','Bello','dg 55-34-67','10:00:am-8:00pm');
+INSERT INTO sucursal VALUES(75,'CC paladino','Bogota','cl 25-66-9','8:30:am-8:00pm');
+INSERT INTO sucursal VALUES(10000,'Florida','Medellin','','9:00:am-10:00pm'); 
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Instrucciones de creación e inserción de la tabla CLIENTE
+INSERT INTO cliente VALUES `(`tipo de documento`, `numero de identificacion`,  `nombre completo`, `fecha de nacimiento`,`ciudad de nacimiento`, `direccion residencia`, 
+                             `ciudad de residencia`, `nacionalidad` ,`telefono`);
+*/
+CREATE TABLE cliente(
+tipodoc VARCHAR(10) ,
+CHECK(tipodoc IN ('CC','TI','CE','PB','DNI')),
+numerodeid INT(10) UNSIGNED,
+PRIMARY KEY(tipodoc, numerodeid),
+nombrecompleto VARCHAR(40) NOT NULL,
+fechanaci DATE NOT NULL,
+ciudadnaci VARCHAR(10) NOT NULL,
+direcresid VARCHAR(20) NOT NULL,
+ciudadresid VARCHAR(15) NOT NULL,
+nacionalidad VARCHAR(15) NOT NULL,
+telefono VARCHAR(10) NOT NULL
+
+)ENGINE = InnoDB;
+INSERT INTO cliente VALUES('TI',324568904,'marco  perez perez',now(),'Medellin','kr 25- 1a sur-45','Medellin','colombiano','3003456789');
+INSERT INTO cliente VALUES('CC',426512388,'luz luna coa',now(),'cali','cl 66 sur-48-32','bogota','colombiano','3235804356');
+INSERT INTO cliente VALUES('PB',27478427,'steven johnson garcia',now(),'toronto','dg 5-33-24','cali','canadiense','312286389');
+INSERT INTO cliente VALUES('CC',425034567,'carlos escobar marin',now(),'Medellin','kr 20a-7-92','barranquilla','colombiano','8200032');
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Instrucciones de creación e inserción de la tabla EMPRESA
+INSERT INTO empresa VALUES `(`nit`, `nombre`, `direccion`, `telefono`);
+*/
+CREATE TABLE empresa(
+nit INT(30) UNSIGNED PRIMARY KEY,
+nombre VARCHAR(40) NOT NULL,
+direccion VARCHAR(20) NOT NULL,
+telefono VARCHAR(20) NOT NULL
+)ENGINE = InnoDB;
+INSERT INTO empresa VALUES(121324343,'nike','kr 25- 1a sur-45','3003456789');
+INSERT INTO  empresa VALUES(93820303,'adidas','cl 66 sur-48-32','3235804356');
+INSERT INTO  empresa VALUES(329377072,'coca cola','dg 5-33-24','31228886389');
+INSERT INTO  empresa VALUES(009887472,'postobon','kr 20a-7-92','8200032');
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Instrucciones de creación e inserción de la tabla DIVISA
+INSERT INTO divisa VALUES `(`tipo de divisa`, `tasa de compra `, `tasa de venta`);
+*/
+CREATE TABLE divisa(
+tipodivisa VARCHAR(10) PRIMARY KEY,
+CHECK(tipodivisa IN ('VEF','CRC','NOK','SEK','USD','AUD','CAD','NZD','EUR','AWG','CHF','GBP','TRY','PEN','ARS','BOP','CLP','DOP','MXN','UYU','GTQ','BRL','INR','JPY','CNY','COP')),
+tasadecompra INT(30) UNSIGNED NOT NULL,
+tasadeventa INT(30) UNSIGNED NOT NULL
+)ENGINE = InnoDB;
+INSERT INTO divisa VALUES('USD',3172,1245);
+INSERT INTO divisa VALUES('EUR',2382,2391);
+INSERT INTO divisa VALUES('COP',1456,2982);
+INSERT INTO divisa VALUES('JPY',1245,1333);
+
+
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Instrucciones de creación e inserción de la tabla CAJA
+INSERT INTO caja  VALUES `(`codigo`, `monto total`,`sucursal`);
+*/
+CREATE TABLE caja(
+codigo INT(10) UNSIGNED PRIMARY KEY,
+montototal INT(50) UNSIGNED NOT NULL,
+
+sucursal INT(10)   NOT NULL,
+FOREIGN KEY sucursal (sucursal) REFERENCES sucursal(codigo) ON DELETE CASCADE
+
+)ENGINE = InnoDB;
+INSERT INTO caja  VALUES(1212,2000,101);
+INSERT INTO caja VALUES(2345,400000,405);
+INSERT INTO caja VALUES(1253,0,75);
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*Instrucciones de creación e inserción de la tabla HISTORIAL
+INSERT INTO historial  VALUES `(`codigo`, `monto de entrada `,`monto de salida`,`fecha`,`monto inicial`,`caja`,`divisa`);
+*/
+
+CREATE TABLE historial(
+codigo INT(10) UNSIGNED PRIMARY KEY,
+montodeentrada INT(50) UNSIGNED NOT NULL,
+montosalida INT(10)  UNSIGNED NOT NULL,
+fecha DATE NOT NULL,
+montoinicial INT(10) UNSIGNED NOT NULL,
+
+caja INT(10) NOT NULL,
+FOREIGN KEY caja (caja) REFERENCES caja(codigo) ON DELETE CASCADE,
+
+divisa VARCHAR(10) NOT NULL,
+FOREIGN KEY divisa (divisa) REFERENCES divisa(tipodivisa) ON DELETE CASCADE
+)ENGINE = InnoDB;
+INSERT INTO historial VALUES(2300,200000,300000,now(),150000,8547,'COP');
+INSERT INTO historial VALUES(5632,54200,10000,now(),8530,8547,'USD');
+INSERT INTO historial VALUES(7812,2000,1500,now(),8000,1212,'EUR');
+INSERT INTO historial VALUES(1213,4567,0,now(),6600,1598,'JPY');
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/*Instrucciones de creación e inserción de la tabla EMPLEADO
+INSERT INTO empleado  VALUES `(`tipo de empleado`, `cedula`,`nombre completo`,`numero en el sistema`,`codigotrans`,`caja`,`sucursal`);
+*/
+
+CREATE TABLE empleado(
+tipodeemp VARCHAR(20) NOT NULL,
+CHECK(tipodeemp IN ('cajero','oficial')),
+cedula INT(10) UNSIGNED PRIMARY KEY,
+nombrecompleto VARCHAR(20) NOT NULL,
+numeroensistema INT(10)  UNIQUE NOT NULL,
+codigotrans INT(10) UNSIGNED ,
+caja INT(10) ,
+FOREIGN KEY caja (caja) REFERENCES caja(codigo) ON DELETE CASCADE,
+
+CHECK((tipodeemp='cajero' and codigotrans IS NULL) or (tipodeemp='oficial' and caja IS NULL)),
+
+sucursal INT(10)  NOT NULL,
+FOREIGN KEY sucursal(sucursal) REFERENCES sucursal(numeroderegistro) ON DELETE CASCADE
+)ENGINE = InnoDB;
+INSERT INTO empleado  VALUES('cajero', 123456 ,'juliana velez', 1 ,NULL,1212,101);
+INSERT INTO empleado  VALUES('oficial', 654321 ,'daniel meza', 2 ,123,NULL,203);
+INSERT INTO empleado  VALUES('cajero', 159753 ,'sara uribe', 3,NULL,3966,405);
+INSERT INTO empleado  VALUES('oficial', 133674 ,'carmen ivonne', 4 ,654,NULL,405);
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Instrucciones de creación e inserción de la tabla TRANSFERENCIA
+INSERT INTO transferencia  VALUES `(`numero de transacion`, `cedula`,`nombre completo`,`numero en el sistema`,`codigotrans`,`caja`,`sucursal`);
+*/
+
+CREATE TABLE transferencia(
+numerotrans INT(10) UNSIGNED PRIMARY KEY,
+tipotrans VARCHAR(20) NOT NULL,
+CHECK(tipotrans IN('ingreso','egreso')),
+monto INT(20) UNSIGNED NOT NULL,
+fecha DATE NOT NULL,
+tasacambio INT(20) UNSIGNED NOT NULL,
+
+divisa VARCHAR(10) NOT NULL,
+FOREIGN KEY claveforanea_divisa (divisa) REFERENCES divisa(tipodivisa) ON DELETE CASCADE,
+
+oficial INT(10)  NOT NULL,
+FOREIGN KEY claveforanea_empresa (oficial) REFERENCES empleado(cedula) ON DELETE CASCADE,
+
+sucursalorg INT(10)  NOT NULL,
+FOREIGN KEY claveforanea_sucursalorg (sucursalorg) REFERENCES sucursal(numeroderegistro) ON DELETE CASCADE,
+
+sucursaldest INT(10)  NOT NULL,
+FOREIGN KEY claveforanea_sucursaldest (sucursaldest) REFERENCES sucursal(numeroderegistro) ON DELETE CASCADE,
+CHECK(sucursalorg!=sucursaldest)
+)ENGINE = InnoDB;
+INSERT INTO TRANSFERENCIA  VALUES(1,'ingreso', 1000 ,NOW(), 3000 ,'USD',123,101,203);
+INSERT INTO TRANSFERENCIA  VALUES(2,'egreso', 100000 ,NOW(), 2300 ,'COP',564,203,101);
+INSERT INTO TRANSFERENCIA  VALUES(3,'egreso', 4000 ,NOW(), 4000 ,'EUR',564,405,101);
+INSERT INTO TRANSFERENCIA  VALUES(4,'ingreso', 6000 ,NOW(), 6000 ,'JPY',123,203,75);
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Instrucciones de creación e inserción de la tabla FACTURA
+INSERT INTO factura  VALUES `(`codigo`, `monto de compra`, `monto de venta`, `tipo de factura`,`fecha`, `hora`, `doc cliente` ,`numero cliente`,`nit`,`sucursal`,`divisa de compra`,`divisa de venta`,`cajero`);
+*/
+CREATE TABLE factura(
+codigo INT(10) UNSIGNED PRIMARY KEY,
+montocompra INT(10)UNSIGNED NOT NULL,
+montoventa INT(10) UNSIGNED NOT NULL,
+CHECK(montocompra>0 and montoventa>0),
+tipofac VARCHAR(10) NOT NULL,
+CHECK( tipofac IN  ('compra','venta')),
+fecha DATE NOT NULL,
+hora  TIME NOT NULL,
+
+tipodoccliente VARCHAR(10),
+numerodeidcliente INT(10),
+FOREIGN KEY claveforanea_cliente (tipodoccliente,numerodeidcliente) REFERENCES cliente(tipodoc ,numerodeid) ON DELETE CASCADE,
+
+nit_empresa INT(30),
+FOREIGN KEY claveforanea_empresa (nit_empresa) REFERENCES empresa(nit) ON DELETE CASCADE,
+
+CHECK((tipodoccliente IS NOT NULL AND numerodeidcliente IS NOT NULL AND nit_empresa IS NULL) or (nit_empresa IS NOT NULL AND tipodoccliente IS NULL AND numerodeidcliente IS NULL )),
+
+sucursal INT(10)  NOT NULL,
+FOREIGN KEY claveforanea_sucursal (sucursal) REFERENCES sucursal(numeroderegistro) ON DELETE CASCADE,
+
+divisacompra VARCHAR(10) NOT NULL,
+FOREIGN KEY claveforanea_divisacom (divisacompra) REFERENCES divisa(tipodivisa) ON DELETE CASCADE,
+
+divisaventa VARCHAR(10) NOT NULL,
+FOREIGN KEY claveforanea_divisaven (divisaventa) REFERENCES divisa(tipodivisa) ON DELETE CASCADE,
+
+CHECK(divisacompra='COP' OR divisaventa='COP' AND divisacompra != divisaventa),
+
+cajero INT(10)  NOT NULL,
+FOREIGN KEY claveforanea_empleado (cajero) REFERENCES empleado(cedula) ON DELETE CASCADE
+)ENGINE = InnoDB;
+
+INSERT INTO factura  VALUES(933,100,30000,'compra' ,now(),now(),'CC',1221,NULL,101,'USD','COP',1212);
+INSERT INTO factura  VALUES(224,100,30000,'venta' ,now(),now(),NULL,NULL,9,101,'USD','COP',1212);
+INSERT INTO factura  VALUES(1124,100,30000,'compra' ,now(),now(),'PB',127693,NULL,101,'USD','COP',1212);
+INSERT INTO factura  VALUES(2784,100,30000,'venta' ,now() ,now(),'CC',127693,NULL,101,'USD','COP',1212);
