@@ -11,10 +11,10 @@ $query = "DELETE FROM cliente WHERE (tipodoc = '$_POST[tipoIdBorrado]' AND numer
 $result = mysqli_query($conn, $query);
 
 // Condicional según resultado obtenido
-if($result){
+if ($result) {
 	header("Location: Clientes.php?msgs=" . "El cliente con identificación " . $_POST["idBorrado"] .  " (" . $_POST["tipoIdBorrado"] . ")" . ", fue eliminado correctamente.");
 }
-else{
+else {
 	header("Location: Clientes.php?msge=" . mysqli_error($conn) );
 }
 

@@ -1,51 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <!--configuraciones básicas-->
-    <meta charset="UTF-8">
+    <!-- configuraciones básicas -->
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!--Librería de boostraps-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Creando un link con la hoja de estilos -->
+    <link rel="stylesheet" type="text/css" href="Estilos Main.css">
 
-    <!--Título de la pestaña-->
-    <title> Inicio </title>
-
-    <!--Título de la página-->
-    <header class="alert alert-info"> <h1> Casa de Cambios UnalMed </h1></header>
+    <!-- Título de la pestaña -->
+    <title> Casa de Cambios UnalMed - Inicio </title>
 </head>
-
 <body>
-    <!--Barra de navegación-->
-    <ul class="nav">
-        <li class="nav-pills" >
-            <a class="nav-link border rounded bg-dark active" href="Index.html"> Inicio </a>
-        </li>
-        <li class="nav nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="./Clientes/Clientes.php"> Clientes </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="./Empresas/Empresas.php"> Empresas </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="./Facturas/FacturasMain.php"> Facturas </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="./Consultas/Consultas.php"> Consultas </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="./Busquedas/Busquedas.php"> Busquedas </a>
-        </li>
-    </ul>
+    <!-- Título de la página -->
+    <header class="alert alert-info"> <h1> Casa de Cambios UnalMed </h1></header>
 
-    <div class="col-6 px-1">
-        <br>
-        <p>Bienvenido a la casa de cambios UnalMed, la mejor casa de cambios de Colombia. <br>
-           Puedes utilizar la barra de navegación de la parte superior para explorar las diferentes <br>
-           opciones que te ofrece la página.
+    <!-- Barra de navegación -->
+    <div>
+        <table id="barraNavegacion">
+            <td class="elementoNavegacion" >
+                <a href="./Clientes/Clientes.php"> Clientes </a>
+            </td>
+            <td class="elementoNavegacion" >
+                <a href="./Empresas/Empresas.php"> Empresas </a>
+            </td>
+            <td class="elementoNavegacion" >
+                <a href="./Facturas/FacturasMain.php"> Facturas </a>
+            </td>
+            <td class="elementoNavegacion" >
+                <a href="./Consultas/Consultas.php"> Consultas </a>
+            </td>
+            <td class="elementoNavegacion" >
+                <a href="./Busquedas/Busquedas.php"> Busquedas </a>
+            </td>
+        </table>
+    </div>
+
+    <div id="mensajePrincipal">
+        <p>
+            Bienvenido a la casa de cambios UnalMed, la mejor casa de cambios de Colombia.
+            Puedes utilizar la barra de navegación de la parte superior para explorar las
+            diferentes tablas que componen la base de datos.
        </p>
     </div>
 </body>
