@@ -20,32 +20,29 @@
     <!-- Barra de navegación -->
     <div>
         <table id="barraNavegacion">
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Index.html';">Inicio</button>
+            <td class="elementoNavegacion">
+                <a href="../Index.html"> Inicio </a>
             </td>
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Personas/Personas.php';">Personas</button>
+            <td class="elementoNavegacion">
+                <a href="../Personas/Personas.php"> Personas </a>
             </td>
-            <td class="celdaNavegacion">
-                <button class="elementoSeleccionado" type="button" onclick="window.location.href = 'Empresas.php'">Empresas</button>
+            <td class="elementoNavegacion">
+                <a href="../Empleados/Empleados.php"> Empleados </a>
             </td>
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Empleados/Empleados.php';">Empleados</button>
+            <td class="elementoNavegacion">
+                <a href="../Transacciones/TransaccionesMain.php"> Transacciones </a>
             </td>
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/TransaccionesMain.php';">Transacciones</button>
+            <td class="elementoNavegacion" >
+                <a href="../Sucursales/Sucursales.php"> Sucursales </a>
             </td>
-            <td class="celdaNavegacion" >
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Sucursales/Sucursales.php';">Sucursales</button>
+            <td class="elementoNavegacion">
+                <a href="../Transferencias/Transferencias.php"> Transferencias </a>
             </td>
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transferencias/Transferencias.php';">Transferencias</button>
+            <td class="elementoNavegacion">
+                <a href="../Divisas/Divisas.php"> Divisas </a>
             </td>
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Divisas/Divisas.php';">Divisas</button>
-            </td>
-            <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Cajas/Cajas.php';">Cajas</button>
+            <td class="elementoNavegacion">
+                <a href="../Cajas/Cajas.php"> Cajas </a>
             </td>
         </table>
     </div>

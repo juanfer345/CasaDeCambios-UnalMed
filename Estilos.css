@@ -15,30 +15,33 @@ body {
 
 #barraNavegacion {
 	margin-top: 50px;
-	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 }
-#barraNavegacion td {
-	border-radius: 10px;
+.celdaNavegacion {
+	padding: 0px 2px;
+	text-align: center;
 }
 .elementoNavegacion {
-	width: auto;
-	height: 25px;
+	font: 1em Arial;
+	color: rgb(97, 175, 45);
+	text-align: center;
+	border-radius: 5px;
 	border: 1px solid #ea7117;
 	background-color: rgb(50,50,50);
 	padding: 10px 20px;
-	-webkit-transition: -webkit-transform 0.1s ease-in-out 0;
-	-moz-transition: -moz-transform 0.1s ease-in-out 0s;
 }
 .elementoNavegacion:hover {
-	-webkit-transform:scale(1.2);
-	-moz-transform:scale(1.2);
+	cursor: pointer;
 }
-.elementoNavegacion a {
-	color: rgb(97, 175, 45);
+.elementoSeleccionado {
 	font: 1em Arial;
-	text-decoration: none;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	border-radius: 5px;
+	border: 1px solid #ea7117;
+	background-color: rgb(97, 171, 52);
+	padding: 10px 20px;
 }
 
 #mensajePrincipal {
