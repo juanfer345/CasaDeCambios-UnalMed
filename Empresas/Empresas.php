@@ -1,228 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <!--Configuraciones básicas-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie = edge">
 
-    <!--Librerías de boostraps-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <!-- Creando un link con las hojas de estilos -->
+    <link rel="stylesheet" type="text/css" href="../Estilos.css">
+    <link rel="stylesheet" type="text/css" href="./Estilos_e.css">
 
     <!--Título de la pestaña-->
-    <title> Empresas </title>
-
-    <!--Título de la página-->
-    <header class="alert alert-info"> <h1> Casa de Cambios UnalMed </h1></header>
+    <title> Casa de Cambios UnalMed - Empresas </title>
 </head>
-
 <body>
-    <!--Barra de navegación-->
-    <ul class="nav">
-        <li class="nav-item" >
-            <a class="nav-link border rounded bg-info text-white" href="../Index.html"> Inicio </a>
-        </li>
-             <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="../Clientes/Clientes.php"> Clientes </a>
-        </li>
-        <li class="nav-pills">
-                <a class="nav-link border rounded bg-dark active" href="Empresas.php"> Empresas </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="../Facturas/FacturasMain.php"> Facturas </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="../Consultas/Consultas.php"> Consultas </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link border rounded bg-info text-white" href="../Busquedas/Busquedas.php"> Busquedas </a>
-        </li>
-    </ul>
+    <!--Título de la página-->
+    <header> <h1> Casa de Cambios UnalMed </h1></header>
 
-    <br>
-    <div class="container-fluid mt-3">
+    <!-- Barra de navegación -->
+    <div>
+        <table id="barraNavegacion">
+            <td class="elementoNavegacion">
+                <a href="../Index.html"> Inicio </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Personas/Personas.php"> Personas </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Empleados/Empleados.php"> Empleados </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Transacciones/TransaccionesMain.php"> Transacciones </a>
+            </td>
+            <td class="elementoNavegacion" >
+                <a href="../Sucursales/Sucursales.php"> Sucursales </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Transferencias/Transferencias.php"> Transferencias </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Divisas/Divisas.php"> Divisas </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Cajas/Cajas.php"> Cajas </a>
+            </td>
+        </table>
+    </div>
 
-        <!--Condicionales para mostrar mensajes de confirmación y de error-->
+    <div>
+        <!-- Condicionales para mostrar mensajes de confirmación y de error -->
         <?php if(isset($_GET['msge'])){ ?>
-            <div class="alert alert-danger" role="alert">
+            <div id="error">
                 <?=$_GET['msge'];?>
             </div>
 
         <?php } elseif(isset($_GET['msgs'])){?> 
-            <div class="alert alert-success" role="alert">
+            <div id="correcto">
                 <?=$_GET['msgs'];?>
             </div>
-            
-        <?php } elseif(isset($_GET['msgc'])){ ?>
-            <div class="alert alert-danger" role="alert">
-                <?=$_GET['msgc'];?>
+        <?php }
+
+        if (!isset($_GET["nit"])) {
+
+            ?>
+            <!-- Formulario para insertar un empresa - [Inicio] -->
+            <div id="formulario">
+                <div id="tituloFormulario"> Insertar Empresa </div>
+                <div id="contenidoFormulario">
+                    <form action="Insert_e.php" method="post">
+
+                        <table>
+                            <!-- Número de identificación -->
+                            <tr>
+                            <td><label for="nit"> NIT: </label></td>
+                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="nit" id="nit"></input></td>
+                            </tr>
+
+                            <!-- Nombre -->
+                            <tr>
+                            <td><label for="nombre"> Nombre: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="text" name="nombre" id="nombre"></td>
+                            </tr>
+
+                            <!-- Dirección -->
+                            <tr>
+                            <td><label for="direccion"> Dirección: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="text" name="direccion" id="direccion"></td>
+                            </tr>
+
+                            <!-- Teléfono -->
+                            <tr>
+                            <td><label for="telefono"> Teléfono: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="telefono" id="telefono"></td>
+                            </tr>
+                        </table>
+
+                        <!-- Botones -->
+                        <div class="botones">
+                            <input class="boton" type="submit" id="botonAceptar" value="Insertar">
+                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Empresas.php';">Reiniciar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        <?php } ?>
-
-        <div class="row">
-            <!--Formularios relacionados a empresas - [Inicio]-->
+            <!-- Formulario para insertar un empresa - [Fin] -->
             <?php
-            if (isset($_GET["nit"])) {
-
+        }
+        else{
             ?>
-                <!--Formulario para editar un empresa - [Inicio]-->
-                <div class="col-4 px-2">
-                    <div class="card">
-                        <div class="card-header bg-dark text-white">
-                            Editar Empresa
+            <!-- Formulario para editar un empresa - [Inicio] -->
+            <div id="formulario">
+                <div id="tituloFormulario"> Editar Empresa </div>
+                <div id="contenidoFormulario">
+                    <form action="Update_e.php" method="post">
+
+                        <table>
+                            <!-- Número de identificación -->
+                            <tr>
+                            <td><label for="nit"> NIT: </label></td>
+                            <td class="contenedorCampo"><input type="number" readonly class="campo" name="nit" id="nit" value='<?=$_GET["nit"];?>'></input></td>
+                            </tr>
+
+                            <!-- Nombre -->
+                            <tr>
+                            <td><label for="nombre"> Nombre: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="text" name="nombre" id="nombre" value='<?=$_GET["nombre"];?>'></td>
+                            </tr>
+
+                            <!-- Dirección -->
+                            <tr>
+                            <td><label for="direccion"> Dirección: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="text" name="direccion" id="direccion" value='<?=$_GET["direccion"];?>'></td>
+                            </tr>
+
+                            <!-- Teléfono -->
+                            <tr>
+                            <td><label for="telefono"> Teléfono: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="telefono" id="telefono" value='<?=$_GET["telefono"];?>'></td>
+                            </tr>
+                        </table>
+
+                        <!-- Botones -->
+                        <div class="botones">
+                            <input class="boton" type="submit" id="botonAceptar" value="Guardar">
+                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Empresas.php';">Descartar</button>
                         </div>
-                        <div class="card-body">
-
-                            <form action="Update_e.php" class="form-group" method="post">
-
-                                <!--Número de identificación-->
-                                <div class="form-group">
-                                    <label> NIT: </label>
-                                    <input type="text" readonly name="nit" value='<?=$_GET["nit"];?>' class="form-control">
-                                </div>
-
-                                <!--Nombre-->
-                                <div class="form-group">
-                                    <label> Nombre: </label>
-                                    <input type="text" name="nombre" value='<?=$_GET["nombre"];?>' class="form-control">
-                                </div>
-
-                                <!--Dirección-->
-                                <div class="form-group">
-                                    <label> Dirección: </label>
-                                    <input type="text" name="direccion" value='<?=$_GET["direccion"];?>' class="form-control">
-                                </div>
-
-                                <!--Teléfono-->
-                                <div class="form-group">
-                                    <label> Teléfono: </label>
-                                    <input type="text" name="telefono" value='<?=$_GET["telefono"];?>' class="form-control">
-                                </div>
-
-                                <!--Botones-->
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-dark" value="Guardar">
-                                    <a href="Empresas.php" class="btn btn-danger"> Descartar </a>
-                                </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Formulario para editar un empresa - [Fin] -->
+            <?php
+        }
+        ?>
+        <!-- Tabla de empresas - [Inicio] -->
+        <div id="divTabla">
+            <div id="tituloTabla"> Empresas Registradas </div>
+            <table id="tabla">
+                <thead id="encabezadoTabla">
+                    <tr>
+                        <th> NIT </th>
+                        <th> Nombre </th>
+                        <th> Dirección </th>
+                        <th> Teléfono </th>
+                        <th> Acciones </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        require('Select_e.php');
+                        if ($result){
+                            foreach ($result as $fila){
+                    ?>
+                    <tr>
+                        <td><?=$fila['nit'];?></td>
+                        <td><?=$fila['nombre'];?></td>
+                        <td><?=$fila['direccion'];?></td>
+                        <td><?=$fila['telefono'];?></td>
+                        <td>
+                            <div><form id="formEditar" action="Empresas.php" method="GET">
+                                <input type="text" name="nit" value='<?=$fila['nit'];?>' hidden>
+                                <input type="text" name="nombre" value='<?=$fila['nombre'];?>' hidden>
+                                <input type="text" name="direccion" value='<?=$fila['direccion'];?>' hidden>
+                                <input type="text" name="telefono" value='<?=$fila['telefono'];?>' hidden>
+                                <button class="boton" id="botonAceptarTabla" title="Editar" type="submit"> Editar </button>
                             </form>
-                        </div>
-                    </div>
-                </div>
-                <!--Formulario para editar un empresa - [Fin]-->
-            <?php
-            }
-            else{
-            ?>
-                <!--Formulario para insertar un empresa - [Inicio]-->
-                <div class="col-4 px-2">
-                    <div class="card">
-                        <div class="card-header bg-dark text-white">
-                            Insertar Empresa
-                        </div>
-                        <div class="card-body">
-                            <form action="Insert_e.php" class="form-group" method="post">
-
-                                <!--Número de identificación-->
-                                <div class="form-group">
-                                    <label> NIT: </label>
-                                    <input type="text" name="nit" id="nit" class="form-control">
-                                </div>
-
-                                <!--Nombre-->
-                                <div class="form-group">
-                                    <label> Nombre: </label>
-                                    <input type="text" name="nombre" id="nombre" class="form-control">
-                                </div>
-
-                                <!--Dirección-->
-                                <div class="form-group">
-                                    <label> Dirección: </label>
-                                    <input type="text" name="direccion" id="direccion" class="form-control">
-                                </div>
-
-                                <!--Teléfono-->
-                                <div class="form-group">
-                                    <label> Teléfono: </label>
-                                    <input type="text" name="telefono" id="telefono" class="form-control">
-                                </div>
-                                
-                                <!--Botones-->
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-success" value="Insertar">
-                                    <a href="Empresas.php" class="btn btn-danger"> Reiniciar </a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!--Formulario para insertar un empresa - [Fin]-->
-            <?php
-                }
-            ?>
-            <!--Formularios relacionados a empresas - [Fin]-->
-
-            <!--Tabla de empresas - [Inicio]-->
-            <div class="col-8 px-3">
-                <div class="col py-1 bg-dark text-white text-center">
-                    <h3> Empresas Registradas </h3>
-                </div>
-                <table class="table-sm table-bordered border-rounded table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col" class="text-center"> NIT </th>
-                            <th scope="col" class="text-center"> Nombre </th>
-                            <th scope="col" class="text-center"> Dirección </th>
-                            <th scope="col" class="text-center"> Teléfono </th>
-                            <th scope="col" class="text-center"> Editar </th>
-                            <th scope="col" class="text-center"> Borrar </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                            require('Select_e.php');
-                            if ($result){
-                                foreach ($result as $fila){
-                        ?>
-                        <tr>
-                            <td class="text-center" style="width: 250px;"><?=$fila['nit'];?></td>
-                            <td class="text-center" style="width: 250px;"><?=$fila['nombre'];?></td>
-                            <td class="text-center" style="width: 250px;"><?=$fila['direccion'];?></td>
-                            <td class="text-center" style="width: 250px;"><?=$fila['telefono'];?></td>
-
-                            <td class="text-center" style="width: 150px;">
-                                <form action="Empresas.php" method="GET" class="col">
-                                    <input type="text" name="nit" value='<?=$fila['nit'];?>' hidden>
-                                    <input type="text" name="nombre" value='<?=$fila['nombre'];?>' hidden>
-                                    <input type="text" name="direccion" value='<?=$fila['direccion'];?>' hidden>
-                                    <input type="text" name="telefono" value='<?=$fila['telefono'];?>' hidden>
-                                    <button class="btn btn-success" title="Editar" type="submit">
-                                        <i class="far fa-edit"></i>
-                                    </button>
-                                </form>
-                            </td>
-
-                            <td class="text-center" style="width: 150px;">
-                                <form action="Delete_e.php" method="POST" class="col">
-                                    <input type="text" name="idBorrado" value='<?=$fila['nit'];?>' hidden>
-                                    <button class="btn btn-danger" title="Eliminar" type="submit"> 
-                                        <i class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                        <?php
-                                }
+                            <form id="formEliminar" action="Delete_e.php" method="POST">
+                                <input type="text" name="nit" value='<?=$fila['nit'];?>' hidden>
+                                <button class="boton" id="botonCancelarTabla" title="Eliminar" type="submit"> Eliminar </button>
+                            </form></div>
+                        </td>
+                    </tr>
+                    <?php
                             }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-            <!--Tabla de empresas - [Fin]-->
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
+        <!-- Tabla de empresas - [Fin] -->
     </div>
+</div>
 </body>
 </html>

@@ -6,8 +6,9 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <meta http-equiv="X-UA-Compatible" content="ie = edge">
 
-    <!-- Creando un link con la hoja de estilos -->
+    <!-- Creando un link con las hojas de estilos -->
     <link rel="stylesheet" type="text/css" href="../Estilos.css">
+    <link rel="stylesheet" type="text/css" href="./Estilos_p.css">
 
     <!--Título de la pestaña-->
     <title> Casa de Cambios UnalMed - Personas </title>
@@ -19,29 +20,29 @@
     <!-- Barra de navegación -->
     <div>
         <table id="barraNavegacion">
-            <td class="elementoNavegacion" >
+            <td class="elementoNavegacion">
                 <a href="../Index.html"> Inicio </a>
             </td>
-            <td class="elementoNavegacion" >
-                <a href="./Empresas/Empresas.php"> Empresas </a>
+            <td class="elementoNavegacion">
+                <a href="../Empresas/Empresas.php"> Empresas </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Empleados/Empleados.php"> Empleados </a>
+            </td>
+            <td class="elementoNavegacion">
+                <a href="../Transacciones/TransaccionesMain.php"> Transacciones </a>
             </td>
             <td class="elementoNavegacion" >
-                <a href="./Empleados/Empleados.php"> Empleados </a>
+                <a href="../Sucursales/Sucursales.php"> Sucursales </a>
             </td>
-            <td class="elementoNavegacion" >
-                <a href="./Transacciones/TransaccionesMain.php"> Transacciones </a>
+            <td class="elementoNavegacion">
+                <a href="../Transferencias/Transferencias.php"> Transferencias </a>
             </td>
-            <td class="elementoNavegacion" >
-                <a href="./Sucursales/Sucursales.php"> Sucursales </a>
+            <td class="elementoNavegacion">
+                <a href="../Divisas/Divisas.php"> Divisas </a>
             </td>
-            <td class="elementoNavegacion" >
-                <a href="./Transferencias/Transferencias.php"> Transferencias </a>
-            </td>
-            <td class="elementoNavegacion" >
-                <a href="./Divisas/Divisas.php"> Divisas </a>
-            </td>
-            <td class="elementoNavegacion" >
-                <a href="./Cajas/Cajas.php"> Cajas </a>
+            <td class="elementoNavegacion">
+                <a href="../Cajas/Cajas.php"> Cajas </a>
             </td>
         </table>
     </div>
@@ -127,9 +128,8 @@
                             <!-- Teléfono -->
                             <tr>
                             <td><label for="telefono"> Teléfono: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="number" name="telefono" id="telefono"></td>
+                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="telefono" id="telefono"></td>
                             </tr>
-
                         </table>
 
                         <!-- Botones -->
@@ -203,7 +203,7 @@
                             <!-- Teléfono -->
                             <tr>
                             <td><label for="telefonoE"> Teléfono: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" id="telefonoE" name="telefono" value='<?=$_GET["telefono"];?>'></td>
+                            <td class="contenedorCampo"><input class="campo" type="number" min="0" id="telefonoE" name="telefono" value='<?=$_GET["telefono"];?>'></td>
                             </tr>
                         </table>
 
@@ -219,7 +219,6 @@
         <?php
             }
         ?>
-
         <!-- Tabla de personas - [Inicio] -->
         <div id="divTabla">
             <div id="tituloTabla"> Personas Registradas </div>
