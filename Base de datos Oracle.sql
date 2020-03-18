@@ -2,12 +2,12 @@
 # BASE DE DATOS: CASA DE CAMBIOS UNALMED
 
 # Creando y activando el uso de la base de datos
-CREATE DATABASE trabajo_casa_de_cambios_unalmed;
-USE trabajo_casa_de_cambios_unalmed;
+CREATE DATABASE casa_de_cambios_unalmed;
+USE casa_de_cambios_unalmed;
 
 # Creación e inserción de datos de la tabla SUCURSAL-----------------------------------------------------------
 CREATE TABLE SUCURSAL(
-	numeroRegistro INT(10) UNSIGNED PRIMARY KEY,
+	numeroRegistro NUMBER(10) UNSIGNED PRIMARY KEY,
 	nombre VARCHAR(20) UNIQUE NOT NULL,
 	ciudad VARCHAR(20) NOT NULL,
 	direccion VARCHAR(20) NOT NULL,
