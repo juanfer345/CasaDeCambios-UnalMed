@@ -8,10 +8,10 @@
 
     <!-- Creando un link con las hojas de estilos -->
     <link rel="stylesheet" type="text/css" href="../Estilos.css">
-    <link rel="stylesheet" type="text/css" href="./Estilos_s.css">
+    <link rel="stylesheet" type="text/css" href="./Estilos_c.css">
 
     <!--Título de la pestaña-->
-    <title> Casa de Cambios UnalMed - Sucursales </title>
+    <title> Casa de Cambios UnalMed - Cajas </title>
 </head>
 <body>
     <!--Título de la página-->
@@ -36,7 +36,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/Transacciones.php';">Transacciones</button>
             </td>
             <td class="celdaNavegacion" >
-                <button class="elementoSeleccionado" type="button" onclick="window.location.href = '.Sucursales.php';">Sucursales</button>
+                <button class="elementoNavegacion" type="button" onclick="window.location.href = '.Sucursales.php';">Sucursales</button>
             </td>
             <td class="celdaNavegacion">
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transferencias/Transferencias.php';">Transferencias</button>
@@ -45,7 +45,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Divisas/Divisas.php';">Divisas</button>
             </td>
             <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Cajas/Cajas.php';">Cajas</button>
+                <button class="elementoSeleccionado" type="button" onclick="window.location.href = '../Cajas/Cajas.php';">Cajas</button>
             </td>
         </table>
     </div>

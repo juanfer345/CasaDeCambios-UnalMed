@@ -33,7 +33,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Empleados/Empleados.php';">Empleados</button>
             </td>
             <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/TransaccionesMain.php';">Transacciones</button>
+                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/Transacciones.php';">Transacciones</button>
             </td>
             <td class="celdaNavegacion" >
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Sucursales/Sucursales.php';">Sucursales</button>
@@ -66,7 +66,7 @@
         if (!isset($_GET["nit"])) {
 
             ?>
-            <!-- Formulario para insertar un empresa - [Inicio] -->
+            <!-- Formulario para insertar una empresa - [Inicio] -->
             <div id="formulario">
                 <div id="tituloFormulario"> Insertar Empresa </div>
                 <div id="contenidoFormulario">
@@ -106,12 +106,12 @@
                     </form>
                 </div>
             </div>
-            <!-- Formulario para insertar un empresa - [Fin] -->
+            <!-- Formulario para insertar una empresa - [Fin] -->
             <?php
         }
         else{
             ?>
-            <!-- Formulario para editar un empresa - [Inicio] -->
+            <!-- Formulario para editar una empresa - [Inicio] -->
             <div id="formulario">
                 <div id="tituloFormulario"> Editar Empresa </div>
                 <div id="contenidoFormulario">
@@ -151,7 +151,7 @@
                     </form>
                 </div>
             </div>
-            <!-- Formulario para editar un empresa - [Fin] -->
+            <!-- Formulario para editar una empresa - [Fin] -->
             <?php
         }
         ?>
