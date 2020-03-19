@@ -36,7 +36,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/Transacciones.php';">Transacciones</button>
             </td>
             <td class="celdaNavegacion" >
-                <button class="elementoSeleccionado" type="button" onclick="window.location.href = '.Sucursales.php';">Sucursales</button>
+                <button class="elementoSeleccionado" type="button" onclick="window.location.href = 'Sucursales.php';">Sucursales</button>
             </td>
             <td class="celdaNavegacion">
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transferencias/Transferencias.php';">Transferencias</button>
@@ -73,7 +73,7 @@
                         <table>
                             <!-- Número de identificación -->
                             <tr>
-                            <td><label for="numeroRegistro"> Numero de Registro: </label></td>
+                            <td><label for="numeroRegistro"> Numero de registro: </label></td>
                             <td class="contenedorCampo"><input type="number" class="campo" min="0" name="numeroRegistro" id="numeroRegistro"></input></td>
                             </tr>
 
@@ -97,7 +97,7 @@
 
                             <!-- horario -->
                             <tr>
-                            <td><label for="horario"> horario: </label></td>
+                            <td><label for="horario"> Horario: </label></td>
                             <td class="contenedorCampo"><input class="campo" type="text" name="horario" id="horario"></td>
                             </tr>
                         </table>
@@ -124,7 +124,7 @@
                         <table>
                             <!-- Número de identificación -->
                             <tr>
-                            <td><label for="numeroRegistro"> Numero de Registro: </label></td>
+                            <td><label for="numeroRegistro"> Numero de registro: </label></td>
                             <td class="contenedorCampo"><input type="number" readonly class="campo" name="numeroRegistro" id="numeroRegistro" value='<?=$_GET["numeroRegistro"];?>'></input></td>
                             </tr>
 
@@ -148,7 +148,7 @@
 
                             <!-- horario -->
                             <tr>
-                            <td><label for="horario"> horario: </label></td>
+                            <td><label for="horario"> Horario: </label></td>
                             <td class="contenedorCampo"><input class="campo" type="text" name="horario" id="horario" value='<?=$_GET["horario"];?>'></td>
                             </tr>
                         </table>
@@ -215,6 +215,5 @@
         </div>
         <!-- Tabla de sucursales - [Fin] -->
     </div>
-</div>
 </body>
 </html>

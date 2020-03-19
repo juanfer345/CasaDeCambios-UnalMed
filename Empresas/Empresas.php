@@ -202,6 +202,5 @@
         </div>
         <!-- Tabla de empresas - [Fin] -->
     </div>
-</div>
 </body>
 </html>

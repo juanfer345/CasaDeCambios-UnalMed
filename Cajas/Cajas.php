@@ -36,7 +36,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/Transacciones.php';">Transacciones</button>
             </td>
             <td class="celdaNavegacion" >
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '.Sucursales.php';">Sucursales</button>
+                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Sucursales/Sucursales.php';">Sucursales</button>
             </td>
             <td class="celdaNavegacion">
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transferencias/Transferencias.php';">Transferencias</button>
@@ -45,7 +45,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Divisas/Divisas.php';">Divisas</button>
             </td>
             <td class="celdaNavegacion">
-                <button class="elementoSeleccionado" type="button" onclick="window.location.href = '../Cajas/Cajas.php';">Cajas</button>
+                <button class="elementoSeleccionado" type="button" onclick="window.location.href = 'Cajas.php';">Cajas</button>
             </td>
         </table>
     </div>
@@ -62,146 +62,126 @@
             </div>
         <?php }
 
-        if (!isset($_GET["numeroRegistro"])) {
+        if (!isset($_GET["codigo"])) {
 
             ?>
-            <!-- Formulario para insertar una sucursal - [Inicio] -->
+            <!-- Formulario para insertar una caja - [Inicio] -->
             <div id="formulario">
-                <div id="tituloFormulario"> Insertar Sucursal </div>
+                <div id="tituloFormulario"> Insertar Caja </div>
                 <div id="contenidoFormulario">
-                    <form action="Insert_s.php" method="post">
+                    <form action="Insert_c.php" method="post">
                         <table>
-                            <!-- Número de identificación -->
                             <tr>
-                            <td><label for="numeroRegistro"> Numero de Registro: </label></td>
-                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="numeroRegistro" id="numeroRegistro"></input></td>
+                            <td><label for="codigo"> Código: </label></td>
+                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="codigo" id="codigo"></input></td>
                             </tr>
 
-                            <!-- Nombre -->
                             <tr>
-                            <td><label for="nombre"> Nombre: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="nombre" id="nombre"></td>
+                            <td><label for="montoTotal"> Monto total: </label></td>
+                            <td class="contenedorCampo"><input type="number" step="0.01" class="campo" min="0" name="montoTotal" id="montoTotal"></td>
                             </tr>
 
-                            <!-- Ciudad -->
                             <tr>
-                            <td><label for="ciudad"> Ciudad: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="ciudad" id="ciudad"></td>
-                            </tr>
-
-                            <!-- Dirección -->
-                            <tr>
-                            <td><label for="direccion"> Dirección: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="direccion" id="direccion"></td>
-                            </tr>
-
-                            <!-- horario -->
-                            <tr>
-                            <td><label for="horario"> horario: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="horario" id="horario"></td>
+                            <td><label for="idSucursal"> Sucursales registradas: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="idSucursal" id="idSucursal">
+                                <?php
+                                require('../Sucursales/Select_s.php');
+                                if ($result){
+                                    foreach ($result as $fila){ ?>
+                                        <option value="<?=$fila['numeroRegistro'];?>"> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
+                                <?php }
+                                } ?>
+                            </select></td>
                             </tr>
                         </table>
-
-                        <!-- Botones -->
                         <div class="botones">
                             <input class="boton" type="submit" id="botonAceptar" value="Insertar">
-                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Sucursales.php';">Reiniciar</button>
+                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Cajas.php';">Reiniciar</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- Formulario para insertar una sucursal - [Fin] -->
+            <!-- Formulario para insertar una caja - [Fin] -->
             <?php
         }
         else{
             ?>
-            <!-- Formulario para editar una sucursal - [Inicio] -->
+            <!-- Formulario para editar una caja - [Inicio] -->
             <div id="formulario">
-                <div id="tituloFormulario"> Editar Sucursal </div>
+                <div id="tituloFormulario"> Editar Caja </div>
                 <div id="contenidoFormulario">
-                    <form action="Update_s.php" method="post">
+                    <form action="Update_c.php" method="post">
 
                         <table>
-                            <!-- Número de identificación -->
                             <tr>
-                            <td><label for="numeroRegistro"> Numero de Registro: </label></td>
-                            <td class="contenedorCampo"><input type="number" readonly class="campo" name="numeroRegistro" id="numeroRegistro" value='<?=$_GET["numeroRegistro"];?>'></input></td>
+                            <td><label for="codigo"> Código: </label></td>
+                            <td class="contenedorCampo"><input type="number" readonly class="campo" name="codigo" id="codigo" value='<?=$_GET["codigo"];?>'></input></td>
                             </tr>
 
-                            <!-- Nombre -->
                             <tr>
-                            <td><label for="nombre"> Nombre: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="nombre" id="nombre" value='<?=$_GET["nombre"];?>'></td>
+                            <td><label for="montoTotal"> Monto total: </label></td>
+                            <td class="contenedorCampo"><input type="number" step="0.01" class="campo" min="0" name="montoTotal" id="montoTotal" value='<?=$_GET["montoTotal"];?>'></td>
                             </tr>
 
-                            <!-- Ciudad -->
                             <tr>
-                            <td><label for="ciudad"> Ciudad: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="ciudad" id="ciudad" value='<?=$_GET["ciudad"];?>'></td>
-                            </tr>
-
-                            <!-- Dirección -->
-                            <tr>
-                            <td><label for="direccion"> Dirección: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="direccion" id="direccion" value='<?=$_GET["direccion"];?>'></td>
-                            </tr>
-
-                            <!-- horario -->
-                            <tr>
-                            <td><label for="horario"> horario: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="horario" id="horario" value='<?=$_GET["horario"];?>'></td>
+                            <td><label for="idSucursal"> Sucursal: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="idSucursal" id="idSucursal" >
+                                <?php
+                                require('../Sucursales/Select_s.php');
+                                if ($result){
+                                    foreach ($result as $fila){ 
+                                        if ($fila['numeroRegistro'] != $_GET['idSucursal']) { ?>
+                                            <option value="<?=$fila['numeroRegistro'];?>"> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
+                                <?php   } else {?>
+                                            <option value="<?=$fila['numeroRegistro'];?>" selected> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
+                                <?php   }
+                                    }
+                                } ?>
+                            </select></td>
                             </tr>
                         </table>
-
-                        <!-- Botones -->
                         <div class="botones">
                             <input class="boton" type="submit" id="botonAceptar" value="Guardar">
-                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Sucursales.php';">Descartar</button>
+                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Cajas.php';">Descartar</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- Formulario para editar una sucursal - [Fin] -->
+            <!-- Formulario para editar una caja - [Fin] -->
             <?php
         }
         ?>
-        <!-- Tabla de sucursales - [Inicio] -->
+        <!-- Tabla de cajas - [Inicio] -->
         <div id="divTabla">
-            <div id="tituloTabla"> Sucursales Registradas </div>
+            <div id="tituloTabla"> Cajas Registradas </div>
             <table id="tabla">
                 <thead id="encabezadoTabla">
                     <tr>
-                        <th> Numero de Registro </th>
-                        <th> Nombre </th>
-                        <th> Ciudad </th>
-                        <th> Dirección </th>
-                        <th> Horario </th>
+                        <th> Código </th>
+                        <th> Monto total </th>
+                        <th> Sucursal </th>
                         <th> Acciones </th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        require('Select_s.php');
+                        require('Select_c.php');
                         if ($result){
                             foreach ($result as $fila){
                     ?>
                     <tr>
-                        <td><?=$fila['numeroRegistro'];?></td>
-                        <td><?=$fila['nombre'];?></td>
-                        <td><?=$fila['ciudad'];?></td>
-                        <td><?=$fila['direccion'];?></td>
-                        <td><?=$fila['horario'];?></td>
+                        <td><?=$fila['codigo'];?></td>
+                        <td><?=$fila['montoTotal'];?></td>
+                        <td><?=$fila['idSucursal'];?></td>
                         <td>
-                            <div><form id="formEditar" action="Sucursales.php" method="GET">
-                                <input type="text" name="numeroRegistro" value='<?=$fila['numeroRegistro'];?>' hidden>
-                                <input type="text" name="nombre" value='<?=$fila['nombre'];?>' hidden>
-                                <input type="text" name="ciudad" value='<?=$fila['ciudad'];?>' hidden>
-                                <input type="text" name="direccion" value='<?=$fila['direccion'];?>' hidden>
-                                <input type="text" name="horario" value='<?=$fila['horario'];?>' hidden>
+                            <div><form id="formEditar" action="Cajas.php" method="GET">
+                                <input type="text" name="codigo" value='<?=$fila['codigo'];?>' hidden>
+                                <input type="text" name="montoTotal" value='<?=$fila['montoTotal'];?>' hidden>
+                                <input type="text" name="idSucursal" value='<?=$fila['idSucursal'];?>' hidden>
                                 <button class="boton" id="botonAceptarTabla" title="Editar" type="submit"> Editar </button>
                             </form>
-                            <form id="formEliminar" action="Delete_s.php" method="POST">
-                                <input type="text" name="numeroRegistro" value='<?=$fila['numeroRegistro'];?>' hidden>
+                            <form id="formEliminar" action="Delete_c.php" method="POST">
+                                <input type="text" name="codigo" value='<?=$fila['codigo'];?>' hidden>
                                 <button class="boton" id="botonCancelarTabla" title="Eliminar" type="submit"> Eliminar </button>
                             </form></div>
                         </td>
@@ -213,8 +193,7 @@
                 </tbody>
             </table>
         </div>
-        <!-- Tabla de sucursales - [Fin] -->
+        <!-- Tabla de cajas - [Fin] -->
     </div>
-</div>
 </body>
 </html>

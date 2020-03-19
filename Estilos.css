@@ -43,6 +43,9 @@ body {
 	background-color: rgb(97, 171, 52);
 	padding: 10px 20px;
 }
+.elementoSeleccionado:hover {
+	cursor: pointer;
+}
 
 #mensajePrincipal {
 	margin: 40px 190px;
@@ -78,7 +81,6 @@ body {
 	background-color: rgb(214, 18, 18);
 	color: rgb(255, 255, 255);
 	font: 1.3em Arial;
-	height: 30px;
 	margin: 20px 350px 0px 350px;
 	border: 2px solid #710a0a;
 	border-radius: 8px;
@@ -88,7 +90,6 @@ body {
 	background-color: rgb(84, 173, 30);
 	color: rgb(255, 255, 255);
 	font: 1.3em Arial;
-	height: 30px;
 	margin: 20px 350px 0px 350px;
 	border: 2px solid #2f630f;
 	border-radius: 8px;

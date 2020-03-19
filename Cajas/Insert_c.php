@@ -4,17 +4,17 @@
 require('../Conexion.php');
 
 // Asignación de query
-$query = "INSERT INTO SUCURSAL VALUES ('$_POST[numeroRegistro]', '$_POST[nombre]', '$_POST[ciudad]', '$_POST[direccion]', '$_POST[horario]')";
+$query = "INSERT INTO CAJA VALUES ('$_POST[codigo]', '$_POST[montoTotal]', '$_POST[idSucursal]')";
 
 $result = mysqli_query($conn, $query);
 
 // Condicional según resultado obtenido
-	if ($result) {
-     header("Location: Sucursales.php?msgs=" . "La sucursal identificada con el numero de registro " . $_POST["numeroRegistro"] . " fue agregada correctamente.");
-	}
-	else {
-		header("Location: Sucursales.php?msge=" . mysqli_error($conn));
-		echo(mysqli_error($conn));
-	}
+if ($result) {
+ header("Location: Cajas.php?msgs=" . "La caja identificada con el código " . $_POST["codigo"] . " fue agregada correctamente.");
+}
+else {
+	header("Location: Cajas.php?msge=" . mysqli_error($conn));
+	echo(mysqli_error($conn));
+}
 mysqli_close($conn);
 ?>
