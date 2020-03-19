@@ -82,24 +82,24 @@ INSERT INTO CAJA VALUES(1253, 0, 75);
 CREATE TABLE EMPLEADO(
 	cedula BIGINT(30) UNSIGNED PRIMARY KEY,
 	nombreCompleto VARCHAR(20) NOT NULL,
-	numeroEnSistema BIGINT(30) UNIQUE NOT NULL,
+	numeroSistema BIGINT(30) UNIQUE NOT NULL,
 	direccion VARCHAR(20) NOT NULL,
 	telefono BIGINT(30) NOT NULL,
 	idSucursal BIGINT(30) UNSIGNED,
 	FOREIGN KEY fkSuc(idSucursal) REFERENCES SUCURSAL(numeroRegistro) ON DELETE CASCADE,
 	tipoEmp VARCHAR(7) NOT NULL,
 	#CHECK(tipoEmp IN ('cajero', 'oficial')),
-	codigotrans BIGINT(30) UNSIGNED
+	codigoTrans BIGINT(30) UNSIGNED
 	#CHECK((tipoEmp='cajero' and codigotrans IS NULL) or (tipoEmp='oficial' and codigotrans IS NOT NULL)),
 
 ) ENGINE = InnoDB;
 
 #ALTER TABLE EMPLEADO ADD CHECK (tipoEmp='cajero');
 
-INSERT INTO EMPLEADO VALUES(123456, 'juliana velez', 1, 'Calle 4 #48-32', 3103457684, 101, 'cajero', NULL);
-INSERT INTO EMPLEADO VALUES(654321, 'daniel meza', 2, 'Carrera 7 # 5-7', 3158456147, 203, 'oficial', 123);
-INSERT INTO EMPLEADO VALUES(159753, 'sara uribe', 3, 'Calle 8 # 7-2', 3121234567, 405, 'cajero', NULL);
-INSERT INTO EMPLEADO VALUES(133674, 'carmen ivonne', 4, 'Diagonal 6a # 17-23', 5429845, 405, 'oficial', 654);
+INSERT INTO EMPLEADO VALUES(123456, 'juliana velez', 1, 'Calle 4 #48-32', 3103457684, 101, 'Cajero', NULL);
+INSERT INTO EMPLEADO VALUES(654321, 'daniel meza', 2, 'Carrera 7 # 5-7', 3158456147, 203, 'Oficial', 123);
+INSERT INTO EMPLEADO VALUES(159753, 'sara uribe', 3, 'Calle 8 # 7-2', 3121234567, 405, 'Cajero', NULL);
+INSERT INTO EMPLEADO VALUES(133674, 'carmen ivonne', 4, 'Diagonal 6a # 17-23', 5429845, 405, 'Oficial', 654);
 
 # Creación e inserción de datos de la tabla TRANSFERENCIA------------------------------------------------------
 CREATE TABLE TRANSFERENCIA(
