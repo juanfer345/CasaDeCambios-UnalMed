@@ -89,7 +89,7 @@ CREATE TABLE EMPLEADO(
 	FOREIGN KEY fkSuc(idSucursal) REFERENCES SUCURSAL(numeroRegistro) ON DELETE CASCADE,
 	tipoEmp VARCHAR(7) NOT NULL,
 	#CHECK(tipoEmp IN ('cajero', 'oficial')),
-	codigoTrans BIGINT(30) UNSIGNED
+	codigoTrans BIGINT(30) UNIQUE UNSIGNED
 	#CHECK((tipoEmp='cajero' and codigotrans IS NULL) or (tipoEmp='oficial' and codigotrans IS NOT NULL)),
 
 ) ENGINE = InnoDB;
