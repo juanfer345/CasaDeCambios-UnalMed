@@ -3,30 +3,16 @@
 // Creación de conexión
 require('../Conexion.php');
 
-if ($_POST['idSucursal'] != 'NULL') {
-	$sucursal = $_POST['idSucursal'];
-}
-else {
-	$sucursal = "NULL";
-}
-
-if ($_POST['tipoEmp'] == 'Oficial') {
-	$codigo = $_POST['codigoTrans'];
-}
-else {
-	$codigo = "NULL";
-}
-
 // Asignación de query
-$query = "INSERT INTO EMPLEADO VALUES ('$_POST[cedula]', '$_POST[nombreCompleto]', '$_POST[numeroSistema]', '$_POST[direccion]', '$_POST[telefono]', $sucursal, '$_POST[tipoEmp]', $codigo)";					  
+$query = "INSERT INTO TRANSFERENCIA VALUES ('$_POST[numeroTrans]', '$_POST[tipo]', '$_POST[monto]', '$_POST[fecha]', '$_POST[tasaCambio]', '$_POST[idDivisa]', '$_POST[idOficial]', '$_POST[sucursalOrig]', '$_POST[sucursalDest]')";					  
 $result = mysqli_query($conn, $query);
 
 // Condicional según resultado obtenido
 if ($result) {
- header("Location: Empleados.php?msgs=" . "El empleado identificado con la cédula " . $_POST["cedula"] . " fue agregado correctamente.");
+ header("Location: Transferencias.php?msgs=" . "La transferencia número " . $_POST["numeroTrans"] . " fue agregada correctamente.");
 }
 else {
-	header("Location: Empleados.php?msge=" . mysqli_error($conn));
+	header("Location: Transferencias.php?msge=" . mysqli_error($conn));
 	echo(mysqli_error($conn));
 }
 mysqli_close($conn);

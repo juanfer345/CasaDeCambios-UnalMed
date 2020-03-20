@@ -3,32 +3,18 @@
 // Creación de conexión
 require('../Conexion.php');
 
-if ($_POST['idSucursal'] != 'NULL') {
-	$sucursal = $_POST['idSucursal'];
-}
-else {
-	$sucursal = "NULL";
-}
-
-if ($_POST['tipoEmp'] == 'Oficial') {
-	$codigo = $_POST['codigoTrans'];
-}
-else {
-	$codigo = "NULL";
-}
-
 // Asignación de query
-$query = "UPDATE EMPLEADO SET nombreCompleto='$_POST[nombreCompleto]', numeroSistema='$_POST[numeroSistema]', direccion='$_POST[direccion]', telefono='$_POST[telefono]', idSucursal=$sucursal, tipoEmp='$_POST[tipoEmp]', codigoTrans=$codigo WHERE cedula='$_POST[cedula]'";
+$query = "UPDATE TRANSFERENCIA SET tipo='$_POST[tipo]', monto='$_POST[monto]', fecha='$_POST[fecha]', tasaCambio='$_POST[tasaCambio]', idDivisa='$_POST[idDivisa]', idOficial='$_POST[idOficial]', sucursalOrig='$_POST[sucursalOrig]', sucursalDest='$_POST[sucursalDest]' WHERE numeroTrans='$_POST[numeroTrans]'";
 
 // Realizando la actualización
 $result = mysqli_query($conn, $query);
 
 // Condicional según el resultado obtenido
 if ($result) {
-	header("Location: Empleados.php?msgs=" . "El empleado identificado con la cédula " . $_POST["cedula"] . " fue editado correctamente.");
+	header("Location: Transferencias.php?msgs=" . "La transferencia número " . $_POST["numeroTrans"] . " fue editada correctamente.");
 }
 else {
-	header("Location: Empleados.php?msge=" . mysqli_error($conn));
+	header("Location: Transferencias.php?msge=" . mysqli_error($conn));
 }
 
 mysqli_close($conn);

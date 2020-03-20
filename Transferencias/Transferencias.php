@@ -8,10 +8,10 @@
 
     <!-- Creando un link con las hojas de estilos -->
     <link rel="stylesheet" type="text/css" href="../Estilos.css">
-    <link rel="stylesheet" type="text/css" href="./Estilos_em.css">
+    <link rel="stylesheet" type="text/css" href="./Estilos_trans.css">
 
     <!--Título de la pestaña-->
-    <title> Casa de Cambios UnalMed - Empleados </title>
+    <title> Casa de Cambios UnalMed - Transferencias </title>
 </head>
 <body>
     <!--Título de la página-->
@@ -30,7 +30,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Empresas/Empresas.php'">Empresas</button>
             </td>
             <td class="celdaNavegacion">
-                <button class="elementoSeleccionado" type="button" onclick="window.location.href = 'Empleados.php';">Empleados</button>
+                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Empleados/Empleados.php';">Empleados</button>
             </td>
             <td class="celdaNavegacion">
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transacciones/Transacciones.php';">Transacciones</button>
@@ -39,7 +39,7 @@
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Sucursales/Sucursales.php';">Sucursales</button>
             </td>
             <td class="celdaNavegacion">
-                <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Transferencias/Transferencias.php';">Transferencias</button>
+                <button class="elementoSeleccionado" type="button" onclick="window.location.href = 'Transferencias.php';">Transferencias</button>
             </td>
             <td class="celdaNavegacion">
                 <button class="elementoNavegacion" type="button" onclick="window.location.href = '../Divisas/Divisas.php';">Divisas</button>
@@ -62,43 +62,71 @@
             </div>
         <?php }
 
-        if (!isset($_GET["cedula"])) {
+        if (!isset($_GET["numeroTrans"])) {
             ?>
-            <!-- Formulario para insertar un empleado - [Inicio] -->
+            <!-- Formulario para insertar una transferencia - [Inicio] -->
             <div id="formulario">
-                <div id="tituloFormulario"> Insertar Empleado </div>
+                <div id="tituloFormulario"> Insertar Transferencia </div>
                 <div id="contenidoFormulario">
-                    <form action="Insert_em.php" method="post">
+                    <form action="Insert_trans.php" method="post">
                         <table>
                             <tr>
-                            <td><label for="cedula"> Cédula: </label></td>
-                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="cedula" id="cedula"></input></td>
+                            <td><label for="numeroTrans"> Número de transferencia: </label></td>
+                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="numeroTrans" id="numeroTrans"></input></td>
                             </tr>
 
                             <tr>
-                            <td><label for="nombreCompleto"> Nombre completo: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="nombreCompleto" id="nombreCompleto"></td>
+                            <td><label for="tipo"> Tipo: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="tipo" id="tipo">
+                                <option value="Ingreso" selected> Ingreso </option>
+                                <option value="Egreso"> Egreso </option>
+                            </select></td>
                             </tr>
 
                             <tr>
-                            <td><label for="numeroSistema"> Número en sistema: </label></td>
-                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="numeroSistema" id="numeroSistema"></input></td>
+                            <td><label for="monto"> Monto: </label></td>
+                            <td class="contenedorCampo"><input type="number" step="0.01" class="campo" min="0" name="monto" id="monto"></td>
                             </tr>
 
                             <tr>
-                            <td><label for="direccion"> Dirección: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="direccion" id="direccion"></td>
+                            <td><label for="fecha"> Fecha: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="date" name="fecha" id="fecha"></td>
                             </tr>
 
                             <tr>
-                            <td><label for="telefono"> Teléfono: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="telefono" id="telefono"></td>
+                            <td><label for="tasaCambio"> Tasa de cambio: </label></td>
+                            <td class="contenedorCampo"><input type="number" step="0.01" class="campo" min="0" name="tasaCambio" id="tasaCambio"></td>
                             </tr>
 
                             <tr>
-                            <td><label for="idSucursal"> Sucursales registradas: </label></td>
-                            <td class="contenedorCampo"><select class="campo" name="idSucursal" id="idSucursal">
-                                <option value="NULL"> Sin asignar </option>
+                            <td><label for="idDivisa"> Tipo de divisa: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="idDivisa" id="idDivisa">
+                                <?php
+                                require('../Divisas/Select_d.php');
+                                if ($result){
+                                    foreach ($result as $fila){ ?>
+                                        <option value="<?=$fila['tipoDivisa'];?>"> <?=$fila['tipoDivisa'];?> </option>
+                                <?php }
+                                } ?>
+                            </select></td>
+                            </tr>
+
+                            <tr>
+                            <td><label for="idOficial"> Oficiales registrados: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="idOficial" id="idOficial">
+                                <?php
+                                require('../Empleados/Select_oficiales.php');
+                                if ($result){
+                                    foreach ($result as $fila){ ?>
+                                        <option value="<?=$fila['cedula'];?>"> <?=$fila['nombreCompleto'];?> (<?=$fila['cedula'];?>) </option>
+                                <?php }
+                                } ?>
+                            </select></td>
+                            </tr>
+
+                            <tr>
+                            <td><label for="sucursalOrig"> Sucursal origen: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="sucursalOrig" id="sucursalOrig">
                                 <?php
                                 require('../Sucursales/Select_s.php');
                                 if ($result){
@@ -110,16 +138,16 @@
                             </tr>
 
                             <tr>
-                                <td><label for="tipoEmp"> Tipo de empleado: </label></td>
-                                <td class="contenedorCampo"><select class="campo" name="tipoEmp" id="tipoEmp" onchange="opcionOficial(this);">
-                                    <option value="Cajero"> Cajero </option>
-                                    <option value="Oficial"> Oficial </option>
-                                </select></td>
-                            </tr>
-
-                            <tr id="codigoTransT" style="display: none;">
-                            <td><label for="codigoTrans"> Código de transacción: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="codigoTrans" id="codigoTrans"></td>
+                            <td><label for="sucursalDest"> Sucursal origen: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="sucursalDest" id="sucursalDest">
+                                <?php
+                                require('../Sucursales/Select_s.php');
+                                if ($result){
+                                    foreach ($result as $fila){ ?>
+                                        <option value="<?=$fila['numeroRegistro'];?>"> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
+                                <?php }
+                                } ?>
+                            </select></td>
                             </tr>
 
                         </table>
@@ -130,52 +158,94 @@
                     </form>
                 </div>
             </div>
-            <!-- Formulario para insertar un empleado - [Fin] -->
+            <!-- Formulario para insertar una transferencia - [Fin] -->
             <?php
         }
         else{
             ?>
-            <!-- Formulario para editar un empleado - [Inicio] -->
+            <!-- Formulario para editar una transferencia - [Inicio] -->
             <div id="formulario">
-                <div id="tituloFormulario"> Editar Empleado </div>
+                <div id="tituloFormulario"> Editar Transferencia </div>
                 <div id="contenidoFormulario">
-                    <form action="Update_em.php" method="post">
+                    <form action="Update_trans.php" method="post">
 
                         <table>
                             <tr>
-                            <td><label for="cedula"> Cédula: </label></td>
-                            <td class="contenedorCampo"><input type="number" readonly class="campo" min="0" name="cedula" id="cedula" value='<?=$_GET["cedula"];?>'></input></td>
+                            <td><label for="numeroTrans"> Número de transferencia: </label></td>
+                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="numeroTrans" id="numeroTrans" value='<?=$_GET["numeroTrans"];?>'></input></td>
                             </tr>
 
                             <tr>
-                            <td><label for="nombreCompleto"> Nombre completo: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="nombreCompleto" id="nombreCompleto" value='<?=$_GET["nombreCompleto"];?>'></td>
+                            <td><label for="tipo"> Tipo: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="tipo" id="tipo">
+                                <?php
+                                    if ($_GET['tipo'] == 'Ingreso') {?>
+                                        <option value="Ingreso" selected> Ingreso </option>
+                                        <option value="Egreso"> Egreso </option>
+                                <?php   } else {?>
+                                        <option value="Ingreso"> Ingreso </option>
+                                        <option value="Egreso" selected> Egreso </option>
+                                <?php   }?>
+                            </select></td>
                             </tr>
 
                             <tr>
-                            <td><label for="numeroSistema"> Número en sistema: </label></td>
-                            <td class="contenedorCampo"><input type="number" class="campo" min="0" name="numeroSistema" id="numeroSistema" value='<?=$_GET["numeroSistema"];?>'></input></td>
+                            <td><label for="monto"> Monto: </label></td>
+                            <td class="contenedorCampo"><input type="number" step="0.01" class="campo" min="0" name="monto" id="monto" value='<?=$_GET["monto"];?>'></td>
                             </tr>
 
                             <tr>
-                            <td><label for="direccion"> Dirección: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="text" name="direccion" id="direccion" value='<?=$_GET["direccion"];?>'></td>
+                            <td><label for="fecha"> Fecha: </label></td>
+                            <td class="contenedorCampo"><input class="campo" type="date" name="fecha" id="fecha" value='<?=$_GET["fecha"];?>'></td>
                             </tr>
 
                             <tr>
-                            <td><label for="telefono"> Teléfono: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="telefono" id="telefono" value='<?=$_GET["telefono"];?>'></td>
+                            <td><label for="tasaCambio"> Tasa de cambio: </label></td>
+                            <td class="contenedorCampo"><input type="number" step="0.01" class="campo" min="0" name="tasaCambio" id="tasaCambio" value='<?=$_GET["tasaCambio"];?>'></td>
                             </tr>
 
                             <tr>
-                            <td><label for="idSucursal"> Sucursal: </label></td>
-                            <td class="contenedorCampo"><select class="campo" name="idSucursal" id="idSucursal" >
-                                <option value="NULL"> Sin asignar </option>
+                            <td><label for="idDivisa"> Tipo de divisa: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="idDivisa" id="idDivisa">
+                                <?php
+                                require('../Divisas/Select_d.php');
+                                if ($result){
+                                    foreach ($result as $fila){
+                                        if ($fila['tipoDivisa'] != $_GET['idDivisa']) { ?>
+                                            <option value="<?=$fila['tipoDivisa'];?>"> <?=$fila['tipoDivisa'];?> </option>
+                                <?php   } else {?>
+                                            <option value="<?=$fila['tipoDivisa'];?>"> <?=$fila['tipoDivisa'];?> </option>
+                                <?php   }
+                                    }
+                                } ?>
+                            </select></td>
+                            </tr>
+
+                            <tr>
+                            <td><label for="idOficial"> Oficiales registrados: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="idOficial" id="idOficial">
+                                <?php
+                                require('../Empleados/Select_oficiales.php');
+                                if ($result){
+                                    foreach ($result as $fila){
+                                        if ($fila['cedula'] != $_GET['idOficial']) { ?>
+                                            <option value="<?=$fila['cedula'];?>"> <?=$fila['nombreCompleto'];?> (<?=$fila['cedula'];?>) </option>
+                                <?php   } else {?>
+                                            <option value="<?=$fila['cedula'];?>" selected> <?=$fila['nombreCompleto'];?> (<?=$fila['cedula'];?>) </option>
+                                <?php   }
+                                    }
+                                } ?>
+                            </select></td>
+                            </tr>
+
+                            <tr>
+                            <td><label for="sucursalOrig"> Sucursal origen: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="sucursalOrig" id="sucursalOrig">
                                 <?php
                                 require('../Sucursales/Select_s.php');
                                 if ($result){
-                                    foreach ($result as $fila){ 
-                                        if ($fila['numeroRegistro'] != $_GET['idSucursal']) { ?>
+                                    foreach ($result as $fila){
+                                        if ($fila['numeroRegistro'] != $_GET['sucursalOrig']) { ?>
                                             <option value="<?=$fila['numeroRegistro'];?>"> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
                                 <?php   } else {?>
                                             <option value="<?=$fila['numeroRegistro'];?>" selected> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
@@ -186,86 +256,83 @@
                             </tr>
 
                             <tr>
-                                <td><label for="tipoEmp"> Tipo de empleado: </label></td>
-                                <td class="contenedorCampo"><select class="campo" name="tipoEmp" id="tipoEmp" onchange="opcionOficial(this);">
-                                    <?php
-                                    if ($_GET['tipoEmp'] == 'Cajero') {?>
-                                        <option value="Cajero" selected> Cajero </option>
-                                        <option value="Oficial"> Oficial </option>
+                            <td><label for="sucursalDest"> Sucursal origen: </label></td>
+                            <td class="contenedorCampo"><select class="campo" name="sucursalDest" id="sucursalDest">
+                                <?php
+                                require('../Sucursales/Select_s.php');
+                                if ($result){
+                                    foreach ($result as $fila){
+                                        if ($fila['numeroRegistro'] != $_GET['sucursalDest']) { ?>
+                                            <option value="<?=$fila['numeroRegistro'];?>"> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
                                 <?php   } else {?>
-                                        <option value="Cajero"> Cajero </option>
-                                        <option value="Oficial" selected> Oficial </option>
-                                <?php   }?>
-                                </select></td>
-                            </tr>
-                            
-                            <?php
-                            if ($_GET['tipoEmp'] == 'Cajero') {?>
-                                <tr id="codigoTransT" style="display: none;">
-                            <?php   } else {?>
-                                <tr id="codigoTransT">
-                            <?php   }?>
-                            <td><label for="codigoTrans"> Código de transacción: </label></td>
-                            <td class="contenedorCampo"><input class="campo" type="number" min="0" name="codigoTrans" id="codigoTrans" value='<?=$_GET["codigoTrans"];?>'></td>
+                                            <option value="<?=$fila['numeroRegistro'];?>" selected> <?=$fila['nombre'];?> (<?=$fila['numeroRegistro'];?>) </option>
+                                <?php   }
+                                    }
+                                } ?>
+                            </select></td>
                             </tr>
                         </table>
+
                         <div class="botones">
                             <input class="boton" type="submit" id="botonAceptar" value="Guardar">
-                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Empleados.php';">Descartar</button>
+                            <button class="boton" type="button" id="botonCancelar" onclick="window.location.href = 'Transferencias.php';">Descartar</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <!-- Formulario para editar un empleado - [Fin] -->
+            <!-- Formulario para editar una transferencia - [Fin] -->
             <?php
         }
         ?>
-        <!-- Tabla de empleados - [Inicio] -->
+        <!-- Tabla de transferencias - [Inicio] -->
         <div id="divTabla">
-            <div id="tituloTabla"> Empleados Registrados </div>
+            <div id="tituloTabla"> Transferencias Registradas </div>
             <table id="tabla">
                 <thead id="encabezadoTabla">
                     <tr>
-                        <th> Cedula </th>
-                        <th> Nombre </th>
-                        <th> Numero en Sistema </th>
-                        <th> Direccion </th>
-                        <th> Telefono </th>
-                        <th> Sucursal </th>
+                        <th> Número </th>
                         <th> Tipo </th>
-                        <th> Codigo de Transacción </th>
+                        <th> Monto </th>
+                        <th> Fecha </th>
+                        <th> Tasa de Cambio </th>
+                        <th> Divisa </th>
+                        <th> Oficial </th>
+                        <th> Sucursal Origen </th>
+                        <th> Sucursal Desino </th>
                         <th> Acciones </th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        require('Select_em.php');
+                        require('Select_trans.php');
                         if ($result){
                             foreach ($result as $fila){
                     ?>
                     <tr>
-                        <td><?=$fila['cedula'];?></td>
-                        <td><?=$fila['nombreCompleto'];?></td>
-                        <td><?=$fila['numeroSistema'];?></td>
-                        <td><?=$fila['direccion'];?></td>
-                        <td><?=$fila['telefono'];?></td>
-                        <td><?=$fila['idSucursal'];?></td>
-                        <td><?=$fila['tipoEmp'];?></td>
-                        <td><?=$fila['codigoTrans'];?></td>
+                        <td><?=$fila['numeroTrans'];?></td>
+                        <td><?=$fila['tipo'];?></td>
+                        <td><?=$fila['monto'];?></td>
+                        <td><?=$fila['fecha'];?></td>
+                        <td><?=$fila['tasaCambio'];?></td>
+                        <td><?=$fila['idDivisa'];?></td>
+                        <td><?=$fila['idOficial'];?></td>
+                        <td><?=$fila['sucursalOrig'];?></td>
+                        <td><?=$fila['sucursalDest'];?></td>
                         <td>
-                            <div><form id="formEditar" action="Empleados.php" method="GET">
-                                <input type="text" name="cedula" value='<?=$fila['cedula'];?>' hidden>
-                                <input type="text" name="nombreCompleto" value='<?=$fila['nombreCompleto'];?>' hidden>
-                                <input type="text" name="numeroSistema" value='<?=$fila['numeroSistema'];?>' hidden>
-                                <input type="text" name="direccion" value='<?=$fila['direccion'];?>' hidden>
-                                <input type="text" name="telefono" value='<?=$fila['telefono'];?>' hidden>
-                                <input type="text" name="idSucursal" value='<?=$fila['idSucursal'];?>' hidden>
-                                <input type="text" name="tipoEmp" value='<?=$fila['tipoEmp'];?>' hidden>
-                                <input type="text" name="codigoTrans" value='<?=$fila['codigoTrans'];?>' hidden>
+                            <div><form id="formEditar" action="Transferencias.php" method="GET">
+                                <input type="text" name="numeroTrans" value='<?=$fila['numeroTrans'];?>' hidden>
+                                <input type="text" name="tipo" value='<?=$fila['tipo'];?>' hidden>
+                                <input type="text" name="monto" value='<?=$fila['monto'];?>' hidden>
+                                <input type="text" name="fecha" value='<?=$fila['fecha'];?>' hidden>
+                                <input type="text" name="tasaCambio" value='<?=$fila['tasaCambio'];?>' hidden>
+                                <input type="text" name="idDivisa" value='<?=$fila['idDivisa'];?>' hidden>
+                                <input type="text" name="idOficial" value='<?=$fila['idOficial'];?>' hidden>
+                                <input type="text" name="sucursalOrig" value='<?=$fila['sucursalOrig'];?>' hidden>
+                                <input type="text" name="sucursalDest" value='<?=$fila['sucursalDest'];?>' hidden>
                                 <button class="boton" id="botonAceptarTabla" title="Editar" type="submit"> Editar </button>
                             </form>
-                            <form id="formEliminar" action="Delete_em.php" method="POST">
-                                <input type="text" name="cedula" value='<?=$fila['cedula'];?>' hidden>
+                            <form id="formEliminar" action="Delete_trans.php" method="POST">
+                                <input type="text" name="numeroTrans" value='<?=$fila['numeroTrans'];?>' hidden>
                                 <button class="boton" id="botonCancelarTabla" title="Eliminar" type="submit"> Eliminar </button>
                             </form></div>
                         </td>
@@ -277,7 +344,7 @@
                 </tbody>
             </table>
         </div>
-        <!-- Tabla de empleados - [Fin] -->
+        <!-- Tabla de transferencias - [Fin] -->
     </div>
 </body>
 </html>
