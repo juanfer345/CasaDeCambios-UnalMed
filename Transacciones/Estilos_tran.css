@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+#divGrande {
+	text-align: center;
+}
+#formulario {
+	background-color: rgb(50,50,50);
+	color: rgb(255, 255, 255);
+	margin: 30px 0px;
+	border: 1px solid #ea7117;
+	border-radius: 10px;
+  	display: inline-block;
+}
+#tituloFormulario {
+	padding: 8px 10px;
+	color: rgb(97, 175, 45);
+	background-color: rgb(88, 88, 88);
+	font: 2em Arial;
+	text-align: center;
+	border-radius: 10px 10px 0px 0px;
+}
+#contenidoFormulario {
+	padding: 18px 18px;
+	font: 0.8em Arial;
+	text-align: left;
+}
+.campo {
+	font: 1em Arial;
+	width: 400px;
+  	border: none;
+	border-radius: 3px;
+    text-align: center;
+    text-align-last: center;
+	margin-left: 3px;
+}
+
+#botonAceptar {
+	color: rgb(255, 255, 255);
+	padding: 8px 15px;
+  	border: none;
+	border-radius: 3px;
+	background-color: rgb(52, 175, 45);
+	font: 1em Arial;
+}
+#botonCancelar {
+	color: rgb(255, 255, 255);
+	padding: 8px 15px;
+  	border: none;
+	border-radius: 3px;
+	background-color: rgb(179, 22, 22);
+	margin-left: 18px;
+	font: 1em Arial;
+}
+
+#divTabla {
+	background-color: rgb(50,50,50);
+	color: rgb(255, 255, 255);
+	font: 0.8em Arial;
+	border: 1px solid #ea7117;
+	border-radius: 10px;
+}
+#tituloTabla {
+	padding: 8px 10px;
+	color: rgb(97, 175, 45);
+	background-color: rgb(88, 88, 88);
+	font: 2em Arial;
+	text-align: center;
+	border-radius: 10px 10px 0px 0px;
+}
+#tabla {
+	font: 0.9em Arial;
+    text-align: center;
+	padding: 8px 8px;
+}
+#encabezadoTabla th {
+	padding: 12px 6px;
+}
+#botonAceptarTabla {
+	color: rgb(255, 255, 255);
+	padding: 8px 10px;
+  	border: none;
+	border-radius: 3px;
+	background-color: rgb(52, 175, 45);
+	font: 1em Arial;
+}
+#botonCancelarTabla {
+	color: rgb(255, 255, 255);
+	padding: 8px 10px;
+  	border: none;
+	border-radius: 3px;
+	background-color: rgb(179, 22, 22);
+	font: 1em Arial;
+}
